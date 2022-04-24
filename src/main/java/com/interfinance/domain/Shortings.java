@@ -20,8 +20,6 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
 @ToString
 @Table(name="shortings")
 public class Shortings {
