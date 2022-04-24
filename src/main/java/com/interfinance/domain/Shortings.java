@@ -2,8 +2,13 @@ package com.interfinance.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,26 +19,22 @@ import java.util.List;
 import javax.persistence.*;
 
 @Data
-//@AllArgsConstructor
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 @Table(name="shortings")
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class Shortings {
 
-	 
-	 // @GeneratedValue( strategy = GenerationType.AUTO )
-	 // private Long id;
 	@Id
 	private String isin;
     private String issuerName;
-   
-	@OneToMany(
-	            cascade=CascadeType.ALL,
-	            orphanRemoval=true,
-	            fetch = FetchType.LAZY)
-	@JoinColumn(name="isin_id")
-    private List<Events>  events = new ArrayList<>() ;
-	
+    @JsonBackReference
+	@OneToMany(targetEntity = Events.class,cascade=CascadeType.ALL,
+	            fetch = FetchType.EAGER
+	           )
+    @JoinColumn(name ="isin_id",referencedColumnName = "isin")
+    private List<Events>  events  ;
 	
 	
 	public Shortings() {

@@ -2,7 +2,6 @@ package com.interfinance.domain;
 
 import java.util.Date;
 
-import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -14,12 +13,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
 
-//@Data
-//@AllArgsConstructor
-//@Embeddable
 @Entity
 @Table(name="activePositions")
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -34,7 +28,7 @@ public class ActivePositions {
 	private String positionHolder;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="isin_id")
+	@JoinColumn(name="event_id")
 	private Events events;
 
 	  public ActivePositions() {

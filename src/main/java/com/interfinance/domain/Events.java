@@ -5,10 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Embeddable;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,36 +14,39 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 @Data
-//@AllArgsConstructor
-//@Embeddable
 @Entity
-//@Table(name="events")
-@Table
-@JsonIgnoreProperties(ignoreUnknown = true)
+@Table(name="events")
 public class Events {
 	
 	@Id
 	@GeneratedValue( strategy = GenerationType.AUTO )
-	private Long id;
+	private Long event_id;
 	private Date date;
 	private String shortPercent;
 	private String shares;
+	
 	
 	@ManyToOne
 	@JoinColumn(name="isin_id")
 	private Shortings shortings;
 	
+	@JsonBackReference
 	@OneToMany(
             cascade=CascadeType.ALL,
-            orphanRemoval=true,
-            fetch = FetchType.LAZY)
-	@JoinColumn(name="isin_id")
+            orphanRemoval=true
+            )
+	@JoinColumn(name="event_id")
 	private List<ActivePositions> activePositions= new ArrayList<ActivePositions>();
 	
 	  public Events() {
@@ -56,7 +56,7 @@ public class Events {
 	public Events(Long id, Date date, String shortPercent, String shares, Shortings shortings,
 			List<ActivePositions> activePositions) {
 		super();
-		this.id = id;
+		this.event_id = id;
 		this.date = date;
 		this.shortPercent = shortPercent;
 		this.shares = shares;
@@ -103,6 +103,14 @@ public class Events {
 
 	public void setActivePositions(List<ActivePositions> activePositions) {
 		this.activePositions = activePositions;
+	}
+
+	public Long getEvent_id() {
+		return event_id;
+	}
+
+	public void setEvent_id(Long event_id) {
+		this.event_id = event_id;
 	}
 
 	
