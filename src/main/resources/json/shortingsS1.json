@@ -1,21 +1,6 @@
 [
   {
     "isin": "NO0010713936",
-    "issuerName": "ZAPTEC",
-    "events": [
-      {
-        "date": "2022-03-29",
-        "shortPercent": 0.78,
-        "shares": 596630,
-        "activePositions": [
-          {
-            "date": "2022-04-04",
-            "shortPercent": 1.23,
-            "shares": 273677,
-            "positionHolder": "Mirabella Financial Services LLP"
-          }
-        ]
-      }
-      ]
+    "issuerName": "ZAPTEC"
   }
 ]
