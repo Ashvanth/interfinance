@@ -3,7 +3,6 @@ package com.interfinance;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.interfinance.domain.Shortings;
 import com.interfinance.service.ShortingsService;
 
 import org.springframework.boot.CommandLineRunner;
@@ -32,7 +31,7 @@ public class JsontodbApplication {
 //			InputStream inputStream = TypeReference.class.getResourceAsStream("/json/shortings.json");
 //			try {
 //				List<Shortings> shortings = mapper.readValue(inputStream,typeReference);
-//				shortingService.save(shortings);
+//				//shortingService.save(shortings);
 //				System.out.println("Shortings Saved!");
 //			} catch (IOException e){
 //				System.out.println("Unable to save Shortings: " + e.getMessage());
